@@ -25,6 +25,7 @@ from resu import Checkpoint
 
 def process(x):
     time.sleep(1)
+    return x + 1
 
 c = Checkpoint()
 c.insert(range(1000))
