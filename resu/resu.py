@@ -3,6 +3,7 @@
 
 import base64
 import gzip
+import json
 import pickle
 import signal
 import sys
@@ -58,15 +59,15 @@ class Checkpoint:
                 )
             with py7zr.SevenZipFile(self.input_data, 'r') as z:
                 for j in z.readall().values():
-                    return pickle.load(j)
+                    return json.load(j)
 
         elif suffix == '.json':
             with open(self.input_data) as j:
-                return pickle.load(j)
+                return json.load(j)
 
         elif suffix in ['.gz', '.gzip']:
-            with gzip.open(self.ckpt_file, 'rb') as j:
-                return pickle.load(j)
+            with gzip.open(self.input_data, 'rb') as j:
+                return json.load(j)
 
         else:
             raise NotImplementedError(
