@@ -1,6 +1,6 @@
 # Resu
 
-Resume your progress in any python loop
+\[Resu\]me your progress in any Python loop
 
 
 ## Requirements
@@ -22,7 +22,7 @@ import time
 from resu import Progress
 
 def process(x):
-	time.sleep(1)
+    time.sleep(1)
 
 p = Progress()
 p.insert(range(1000))
@@ -55,18 +55,18 @@ import requests
 from resu import Progress
 
 def process(x, url, cooldown):
-	headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
-	resp = requests.post(url, headers=headers, data=x)
-	time.sleep(cooldown)
-	return resp.text
+    headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
+    resp = requests.post(url, headers=headers, data=x)
+    time.sleep(cooldown)
+    return resp.text
 
 p = Progress()
 p.insert('customers_data.json')
 results = p.record(
-	process,
-	url='https://reqbin.com/echo/post/json',
-	cooldown=1,
-	checkpoint_every=5)
+    process,
+    url='https://reqbin.com/echo/post/json',
+    cooldown=1,
+    checkpoint_every=5)
 
 #   0%|          | 0/11 [00:00<?, ?it/s]
 #   8%|▊         | 1/11 [00:02<00:11,  1.10s/it]
@@ -80,8 +80,8 @@ results = p.record(
 #  52%|████▏     | 6/11 [00:12<00:16,  1.10s/it]
 #  69%|██████▉   | 7/11 [00:19<00:08,  1.10s/it]
 
-# Exited for some reason...
+# ...failed for some reason.
 ```
 
-- You can easily resume like described in `Example 1`.
+- Assuming the program failed for some reason, you can easily resume like described in `Example 1`.
 
