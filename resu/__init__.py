@@ -1,5 +1,5 @@
 """Resume your progress in any python loop"""
 
-from .resu import Progress
+from .resu import Checkpoint
 
-__version__ = '0.1'
+__version__ = '0.1.1'

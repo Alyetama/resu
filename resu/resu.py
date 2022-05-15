@@ -8,7 +8,7 @@ import signal
 import sys
 import time
 from pathlib import Path
-from typing import Iterable, Optional, Union
+from typing import Any, Callable, Iterable, Optional, Union
 
 from tqdm import tqdm
 
@@ -18,7 +18,7 @@ except ImportError:
     py7zr = False
 
 
-class Progress:
+class Checkpoint:
 
     def __init__(self,
                  input_data: Optional[Union[Iterable, str]] = None,
@@ -49,7 +49,7 @@ class Progress:
         self.ckpt_io(mode='write')
         sys.exit(1)
 
-    def read_data(self) -> dict:
+    def read_data(self) -> Iterable:
         suffix = Path(self.input_data).suffix.lower()
         if suffix in ['.7z', '.7zip']:
             if not py7zr:
@@ -75,10 +75,10 @@ class Progress:
                 'a file: (.json, .7zip|.7z, .gzip|.gz)')
 
     @staticmethod
-    def _encode(x):
+    def _encode(x: Any) -> bytes:
         return base64.b64encode(pickle.dumps(x))
 
-    def check_progress(self):
+    def check_progress(self) -> list:
         if not self.ckpt_file:
             self.ckpt_file = f'{int(time.time())}.ckpt'
             Path(self.ckpt_file).touch()
@@ -102,11 +102,11 @@ class Progress:
         return data
 
     def record(self,
-               func,
+               func: Callable,
                checkpoint_every: int = 100,
                show_progress: bool = True,
                *args,
-               **kwargs):
+               **kwargs) -> list:
         data = self.check_progress()
         if not data:
             print('The progress is at 100%. Nothing to update.')

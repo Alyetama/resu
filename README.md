@@ -19,31 +19,30 @@ pip install resu
 
 ```py
 import time
-from resu import Progress
+from resu import Checkpoint
 
 def process(x):
     time.sleep(1)
 
-p = Progress()
-p.insert(range(1000))
-p.record(process)
+c = Checkpoint()
+c.insert(range(1000))
+c.record(process)
 
 #   0%|▏                                         | 24/1000 [00:05<16:40,  1.01s/it]
 # ^C KeyboardInterrupt (id: 2) has been caught...
-# Saving progress before terminating the program gracefully...
-# Progress was saved to: `./1652598207.ckpt`
+# Saving progress to checkpoint file `./1652598207.ckpt` before terminating the program gracefully...
 ```
 
-- Then you can resume with:
+- You can resume the same loop by calling the `p.resume` method and passing the checkpoint file path to it before running the program again:
 
 ```py
 
 # ...
 
-p.resume('1652598207.ckpt')
-p.record(process)
+c.resume('1652598207.ckpt')
+c.record(process)
 
-# Resuming... Skipped 24 completed enteries.
+# Resuming from `1652598207.ckpt`... Skipped 24 completed enteries.
 #   0%|                                          | 2/1000 [00:02<16:40,  1.00s/it]
 ```
 
@@ -52,7 +51,7 @@ p.record(process)
 ```py
 import time
 import requests
-from resu import Progress
+from resu import Checkpoint
 
 def process(x, url, cooldown):
     headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
@@ -60,9 +59,9 @@ def process(x, url, cooldown):
     time.sleep(cooldown)
     return resp.text
 
-p = Progress()
-p.insert('customers_data.json')
-results = p.record(
+c = Checkpoint(ckpt_file='/my/custom/ckpt/name.ckpt')
+c.insert('customers_data.json')
+results = c.record(
     process,
     url='https://reqbin.com/echo/post/json',
     cooldown=1,
@@ -74,14 +73,14 @@ results = p.record(
 #  27%|██▋       | 3/11 [00:07<00:20,  1.10s/it]
 #  35%|███▍      | 4/11 [00:09<00:18,  1.10s/it]
 
-#  Writing a checkpoint...
+#  Saving progress to checkpoint file: `/my/custom/ckpt/name.ckpt`...
 
 #  38%|███▊      | 5/11 [00:11<00:17,  1.10s/it]
 #  52%|████▏     | 6/11 [00:12<00:16,  1.10s/it]
 #  69%|██████▉   | 7/11 [00:19<00:08,  1.10s/it]
 
-# ...failed for some reason.
+# ...
 ```
 
-- Assuming the program failed for some reason, you can easily resume like described in `Example 1`.
+- Let's say your program failed for some reason, you can easily resume like described in `Example 1`.
 
