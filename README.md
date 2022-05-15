@@ -1,6 +1,6 @@
 # Resu
 
-\[**Resu**\]me you progress in any Python loop by automatically creating checkpoints without changing your workflow
+\[**Resu**\]me your progress in any *Python loop* by automatically creating checkpoints without changing your workflow.
 
 
 ## Requirements
