@@ -4,11 +4,12 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "resu"
-authors = [{name = "Alyetama", email = "56323389+Alyetama@users.noreply.github.com"}]
+authors = [{name = "Alyetama", email = "malyetama@pm.me"}]
 license = {file = "LICENSE"}
+readme = {file = "README.md", content-type = "text/markdown"}
 classifiers = ["License :: OSI Approved :: MIT License"]
 dynamic = ["version", "description"]
 dependencies = ["tqdm"]
 
 [project.urls]
-Home = "https://github.comm/Alyetama/resu"
+Home = "https://github.com/Alyetama/resu"
