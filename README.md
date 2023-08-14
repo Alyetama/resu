@@ -1,6 +1,6 @@
 # Resu
 
-[![Build checks](https://github.com/Alyetama/resu/actions/workflows/build-checks.yml/badge.svg)](https://github.com/Alyetama/resu/actions/workflows/build-checks.yml) [![Supported Python versions](https://img.shields.io/badge/Python-%3E=3.6-blue.svg)](https://www.python.org/downloads/) [![PEP8](https://img.shields.io/badge/Code%20style-PEP%208-orange.svg)](https://www.python.org/dev/peps/pep-0008/) 
+[![Build checks](https://github.com/Alyetama/resu/actions/workflows/build-checks.yml/badge.svg)](https://github.com/Alyetama/resu/actions/workflows/build-checks.yml) [![Supported Python versions](https://img.shields.io/badge/Python-%3E=3.7-blue.svg)](https://www.python.org/downloads/) [![PEP8](https://img.shields.io/badge/Code%20style-PEP%208-orange.svg)](https://www.python.org/dev/peps/pep-0008/) 
 
 \[**Resu**\]me your progress in any *Python loop* by automatically creating checkpoints without changing your workflow.
 
